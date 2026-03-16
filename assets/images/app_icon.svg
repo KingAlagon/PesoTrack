@@ -1,0 +1,129 @@
+<svg viewBox="100 80 480 480" width="1024" height="1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#1a1040"/>
+      <stop offset="100%" stop-color="#07070f"/>
+    </radialGradient>
+    <radialGradient id="g1" cx="25%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#00C896" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00C896" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="75%" cy="75%" r="55%">
+      <stop offset="0%" stop-color="#0077FF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0077FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="75%" cy="20%" r="45%">
+      <stop offset="0%" stop-color="#9B4DFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#9B4DFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pesoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C896"/>
+      <stop offset="100%" stop-color="#0077FF"/>
+    </linearGradient>
+    <linearGradient id="cardGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00C896"/>
+      <stop offset="100%" stop-color="#0077FF"/>
+    </linearGradient>
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="orbBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+    <clipPath id="iconClip">
+      <rect x="100" y="80" width="480" height="480" rx="110"/>
+    </clipPath>
+    <clipPath id="shineClip">
+      <rect x="100" y="80" width="480" height="240" rx="110"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect x="100" y="80" width="480" height="480" rx="110" fill="url(#bg)"/>
+
+  <!-- Orbs -->
+  <g clip-path="url(#iconClip)">
+    <ellipse cx="200" cy="210" rx="230" ry="210" fill="url(#g1)" filter="url(#orbBlur)"/>
+    <ellipse cx="480" cy="450" rx="210" ry="200" fill="url(#g2)" filter="url(#orbBlur)"/>
+    <ellipse cx="490" cy="140" rx="170" ry="150" fill="url(#g3)" filter="url(#orbBlur)"/>
+  </g>
+
+  <!-- Glass surface -->
+  <rect x="100" y="80" width="480" height="480" rx="110" fill="url(#cardGlass)" stroke="white" stroke-opacity="0.22" stroke-width="1.5"/>
+
+  <!-- Top shine -->
+  <path d="M220 80 Q100 80 100 200 L100 280 Q180 170 380 110 Z" fill="url(#shine)" clip-path="url(#shineClip)"/>
+
+  <!--
+    ₱ symbol — drawn as explicit paths, no fonts needed.
+
+    Layout (within viewBox 100 80 480 480, icon centre at 340,320):
+      Stem  : x=297..333  y=170..415  (36px wide, 245px tall, rounded ends)
+      Bowl  : right-facing semicircular donut
+                outer r=84, inner r=48, centre (333, 258)
+                spans y=174..342
+      Bar 1 : y=247..269  x=265..418  rx=11
+      Bar 2 : y=288..310  x=265..418  rx=11
+  -->
+  <g fill="url(#pesoGrad)" filter="url(#glow)" opacity="0.97">
+
+    <!-- Stem -->
+    <rect x="297" y="170" width="36" height="245" rx="18"/>
+
+    <!--
+      Bowl donut (right half-ring):
+        Outer arc  r=84: top=(333,174)  rightmost=(417,258)  bottom=(333,342)
+        Inner arc  r=48: top=(333,210)  rightmost=(381,258)  bottom=(333,306)
+
+      Bezier k ≈ 0.5523
+        Outer k = 84*0.5523 = 46.4
+        Inner k = 48*0.5523 = 26.5
+
+      Path: outer CW from top→bottom, then straight to inner bottom, inner CCW bottom→top, close.
+    -->
+    <path d="
+      M 333 174
+      C 379.4 174 417 212.6 417 258
+      C 417 303.4 379.4 342 333 342
+      L 333 306
+      C 359.5 306 381 284.5 381 258
+      C 381 231.5 359.5 210 333 210
+      Z
+    "/>
+
+    <!-- Bar 1 -->
+    <rect x="265" y="247" width="153" height="22" rx="11"/>
+
+    <!-- Bar 2 -->
+    <rect x="265" y="288" width="153" height="22" rx="11"/>
+
+  </g>
+
+  <!-- Bottom stats bar -->
+  <rect x="148" y="430" width="384" height="88" rx="20" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+  <rect x="148" y="430" width="384" height="30" rx="20" fill="white" fill-opacity="0.05"/>
+  <!-- progress bar track -->
+  <rect x="170" y="472" width="340" height="8" rx="4" fill="white" fill-opacity="0.1"/>
+  <!-- progress bar fill -->
+  <rect x="170" y="472" width="220" height="8" rx="4" fill="url(#barGrad)"/>
+  <!-- dots -->
+  <circle cx="178" cy="452" r="5" fill="#00C896" opacity="0.9"/>
+  <circle cx="198" cy="452" r="5" fill="#0077FF" opacity="0.7"/>
+  <circle cx="218" cy="452" r="5" fill="#9B4DFF" opacity="0.5"/>
+  <!-- label placeholders -->
+  <rect x="236" y="447" width="80" height="7" rx="3" fill="white" fill-opacity="0.25"/>
+  <rect x="400" y="447" width="108" height="10" rx="3" fill="url(#barGrad)" opacity="0.8"/>
+
+  <!-- Outer glow border -->
+  <rect x="100" y="80" width="480" height="480" rx="110" fill="none" stroke="url(#pesoGrad)" stroke-opacity="0.45" stroke-width="2"/>
+  <rect x="94" y="74" width="492" height="492" rx="116" fill="none" stroke="white" stroke-opacity="0.07" stroke-width="3"/>
+</svg>

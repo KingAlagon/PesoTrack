@@ -5,7 +5,20 @@
       "Bash(flutter analyze:*)",
       "Bash(flutter doctor:*)",
       "Bash(dart pub:*)",
-      "Bash(dart run:*)"
+      "Bash(dart run:*)",
+      "Bash(where inkscape:*)",
+      "Bash(where rsvg-convert:*)",
+      "Bash(where magick:*)",
+      "Bash(where convert:*)",
+      "Bash(npx --version)",
+      "Bash(cd /tmp)",
+      "Bash(npm install:*)",
+      "Bash(node tool/svg_to_png.js)",
+      "Bash(node -e \"const {Resvg} = require\\(''/tmp/node_modules/@resvg/resvg-js''\\); console.log\\(''ok''\\)\")",
+      "Bash(node -e \"const {Resvg} = require\\(''./node_modules/@resvg/resvg-js''\\); console.log\\(''ok''\\)\")",
+      "Bash(npm init:*)",
+      "Bash(node svg_to_png.js)",
+      "Bash(node -e \":*)"
     ]
   }
 }

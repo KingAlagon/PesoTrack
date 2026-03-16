@@ -29,9 +29,66 @@ class PesoTrackApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: appName,
-        theme: AppTheme.light,
+        theme: AppTheme.dark,
         debugShowCheckedModeBanner: false,
         home: const MainScreen(),
+        builder: (context, child) => Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColors.bgStart, AppColors.bgMid, AppColors.bgEnd],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: Stack(
+            children: [
+              const _BackgroundBlobs(),
+              child!,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BackgroundBlobs extends StatelessWidget {
+  const _BackgroundBlobs();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.expand(
+      child: Stack(
+        children: [
+          Positioned(
+            top: -120,
+            left: -80,
+            child: _blob(AppColors.blob1, 380, 0.25),
+          ),
+          Positioned(
+            bottom: 80,
+            right: -80,
+            child: _blob(AppColors.blob2, 300, 0.18),
+          ),
+          Positioned(
+            top: 380,
+            right: -40,
+            child: _blob(AppColors.blob3, 220, 0.12),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _blob(Color color, double size, double opacity) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(
+          colors: [color.withValues(alpha: opacity), Colors.transparent],
+        ),
       ),
     );
   }
